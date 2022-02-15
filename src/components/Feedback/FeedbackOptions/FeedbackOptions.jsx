@@ -1,23 +1,19 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import s from './styles.module.css';
 
-class FeedbackOptions extends Component {
-  render() {
-    const { onSetFeedback } = this.props;
+const FeedbackOptions = ({options, onSetFeedback}) => {
+  const elements = options.map(item => <button key={item} onClick={() => onSetFeedback(item)}>{item}</button>)
     return (
       <div className={s.items}>
-        <button onClick={() => onSetFeedback('good')}>Good</button>
-        <button onClick={() => onSetFeedback('neutral')}>Neutral</button>
-        <button onClick={() => onSetFeedback('bad')}>Bad</button>
+    {elements}
       </div>
     );
   }
-}
 
 export default FeedbackOptions;
 
 PropTypes.propTypes = {
   onSetFeedback: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string),
 };

@@ -18,10 +18,8 @@ const Statistics = props => {
 export default Statistics;
 
 Statistics.propTypes = {
-  props: PropTypes.shape({
     good: PropTypes.number.isRequired,
     bad: PropTypes.number.isRequired,
     result: PropTypes.number.isRequired,
     positivePercentage: PropTypes.number.isRequired,
-  }),
 };

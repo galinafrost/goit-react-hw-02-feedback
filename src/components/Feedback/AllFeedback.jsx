@@ -1,16 +1,19 @@
 import { Component } from 'react';
 
 import FeedbackOptions from './FeedbackOptions';
-import Statistics from './Statistics'
+import Statistics from './Statistics';
+import Notification from './Notification';
 
 import s from './feedback.module.scc';
 
-class AllFidback extends Component {
+class AllFeedback extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0,
+    bad: 0
   };
+
+  static btnOptions = ["good", "neutral", "bad"]
 
   setFeedback = property => {
     console.log(property);
@@ -32,14 +35,12 @@ class AllFidback extends Component {
   }
 
   countPositiveFeedbackPercentage() {
-    const { good, neutral, bad } = this.state;
-    const total = good + neutral + bad;
-    const positivFeedback = good;
-
+    const { good } = this.state;
+  
     let sum = 0;
 
-    if (positivFeedback !== '') {
-      sum = (positivFeedback * 100) / total;
+    if (good !== '') {
+      sum = (good * 100) / this.countTotalFeedback();
     }
 
     return Math.round(sum);
@@ -47,26 +48,24 @@ class AllFidback extends Component {
 
   render() {
     const { setFeedback } = this;
-    const { good, neutral } = this.state;
+    const { good, neutral, bad } = this.state;
     const result = this.countTotalFeedback();
     const positiv = this.countPositiveFeedbackPercentage();
     return (
       <>
         <h1>Please leave feedback</h1>
-        <FeedbackOptions onSetFeedback={setFeedback}/>
+        <FeedbackOptions options={AllFeedback.btnOptions} onSetFeedback={setFeedback}/>
         {result > 0 ? ( 
           <>
         <h2>Statistics</h2>
         <div>
-          <Statistics good={good} neutral={neutral} bad={this.state.bad} positivePercentage={positiv} result={this.countTotalFeedback()}/>
+          <Statistics good={good} neutral={neutral} bad={bad} positivePercentage={positiv} result={this.countTotalFeedback()}/>
         </div>
-        </>) : (<div>
-          <p>No feedback given</p>
-        </div>)}
+        </>) : <Notification />}
       </>
     );
   }
 }
 
-export default AllFidback;
+export default AllFeedback;
 

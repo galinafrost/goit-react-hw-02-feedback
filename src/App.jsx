@@ -1,11 +1,11 @@
 import Section from './components/shared/Section'
-import AllFidback from "./components/Feedback/AllFidback";
+import AllFeedback from "./components/Feedback/AllFeedback";
 
 export default function App() {
   return (
     <div className='container'>
-      <Section title="Fidback">
-      <AllFidback />
+      <Section title="Feedback">
+      <AllFeedback />
       </Section>
     </div>
   );
